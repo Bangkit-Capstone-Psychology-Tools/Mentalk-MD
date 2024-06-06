@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">MentalkApp</string>
+    <string name="kelompok">Dibuat oleh tim C241-PS188 </string>
+    <string name="kalimat_splash">Masih bingung</string>
+    <string name="detail">Detail</string>
+    <string name="welcome">Selamat Datang!</string>
+    <string name="ayo">Ayo isi data diri</string>
+    <string name="name">Nama</string>
+    <string name="belum">Belum punya akun?</string>
+    <string name="daftar">Daftar disini</string>
+    <string name="login">Masuk</string>
+    <string name="please">Mohon isi data diri anda</string>
+    <string name="register">Daftar</string>
+    <string name="phone">Nomor Handphone</string>
+    <string name="certification_number">Nomor Sertifikat</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="profile">Profil</string>
+    <string name="logout">Keluar</string>
+    <string name="googlelogin">Masuk dengan akun Google</string>
 </resources>
