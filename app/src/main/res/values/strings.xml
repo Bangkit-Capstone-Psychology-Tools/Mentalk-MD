@@ -24,4 +24,5 @@
     <string name="pass_length_error">Password must be contained at least 8 characters</string>
     <string name="button1">Mentest</string>
     <string name="button2">Newsletter</string>
+    <string name="your_web_client_id">903027854816-jnj5q9mq6ih6ofhkap6sftaasn2fksrm.apps.googleusercontent.com</string>
 </resources>

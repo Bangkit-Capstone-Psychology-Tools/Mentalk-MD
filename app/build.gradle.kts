@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -58,6 +59,7 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.androidx.paging.common.android)
     implementation("junit:junit:4.12")
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -82,6 +84,9 @@ dependencies {
     androidTestImplementation (libs.core.ktx)
     androidTestImplementation (libs.androidx.rules)
 
+    implementation("com.google.android.gms:play-services-auth:19.2.0")
+    implementation("com.google.firebase:firebase-auth:23.0.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.0")
 
     //RETROFIT
     implementation(libs.retrofit)
