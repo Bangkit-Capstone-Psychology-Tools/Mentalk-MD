@@ -4,35 +4,32 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.CredentialManager
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mentalkapp.R
 import com.example.mentalkapp.databinding.ActivityMainBinding
 import com.example.mentalkapp.view.ImageData
 import com.example.mentalkapp.view.ImageSliderAdapter
-import com.example.mentalkapp.view.ViewModelFactory
 import com.example.mentalkapp.view.login.LoginActivity
-import com.example.mentalkapp.view.splash.SplashActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel by viewModels<MainViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
 
     private var _binding: ActivityMainBinding? = null
     private lateinit var adapter: ImageSliderAdapter
     private val list = ArrayList<ImageData>()
+    private lateinit var auth: FirebaseAuth
     private lateinit var dots: ArrayList<TextView>
     private val binding get() = _binding!!
 
@@ -60,7 +57,15 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        getUserSession()
+        auth = Firebase.auth
+        val firebaseUser = auth.currentUser
+
+        if (firebaseUser == null) {
+            // Not signed in, launch the Login activity
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
     }
 
     private fun selectedDot(position: Int) {
@@ -84,45 +89,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.sign_out_menu -> {
+                Log.d("MainActivity", "Sign out menu item selected")
+                signOut()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_logout -> {
-                viewModel.clearUserSession()
-                viewModel.logoutComplete.observe(this) { isLogoutComplete ->
-                    if (isLogoutComplete) {
-                        navigateToLogin()
-                    }
-                }
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun getUserSession() {
-        viewModel.getUserSession().observe(this) { user ->
-            if (!user.isLogin) {
-                val welcomeActivity = Intent(this, SplashActivity::class.java)
-                welcomeActivity.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(welcomeActivity)
-                finish()
-            } else {
-                viewModel.isLoading.observe(this) { state ->
-                }
-            }
+    private fun signOut() {
+        lifecycleScope.launch {
+            val credentialManager = CredentialManager.create(this@MainActivity)
+            auth.signOut()
+            credentialManager.clearCredentialState(ClearCredentialStateRequest())
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            finish()
         }
     }
 }

@@ -7,7 +7,7 @@
         <menu>
             <item android:id="@+id/btn_profil"
                 android:title="@string/profile"/>
-            <item android:id="@+id/btn_logout"
+            <item android:id="@+id/sign_out_menu"
                 android:title="@string/logout" />
         </menu>
     </item>

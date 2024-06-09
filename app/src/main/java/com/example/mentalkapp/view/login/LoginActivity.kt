@@ -3,80 +3,126 @@ package com.example.mentalkapp.view.login
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.GetCredentialResponse
+import androidx.credentials.exceptions.GetCredentialException
 import androidx.lifecycle.lifecycleScope
 import com.example.mentalkapp.R
-import com.example.mentalkapp.data.response.ErrorResponse
-import com.example.mentalkapp.data.userdata.UserModel
 import com.example.mentalkapp.databinding.ActivityLoginBinding
-import com.example.mentalkapp.view.ViewModelFactory
 import com.example.mentalkapp.view.main.MainActivity
-import com.google.gson.Gson
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.auth
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
-    private val viewModel by viewModels<LoginViewModel> {
-        ViewModelFactory.getInstance(this)
-    }
 
     private var _binding: ActivityLoginBinding? = null
+    private lateinit var auth: FirebaseAuth
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Initialize Firebase Auth
+        auth = com.google.firebase.Firebase.auth
         showLoading(false)
-        setupAction()
         playAnimation()
-    }
-
-    private fun setupAction() {
-        binding.loginButton.setOnClickListener {
-            try {
-                viewModel.isLoading.observe(this) {
-                    showLoading(it)
-                }
-
-                val email = binding.loginEmailCustom.text.toString()
-                val password = binding.loginPasswordCustom.text.toString()
-
-                if (email.isEmpty()) {
-                    binding.loginEmailLayout.error = getString(R.string.fill_email)
-                } else if (password.isEmpty()) {
-                    binding.loginPasswordLayout.error = getString(R.string.fill_password)
-                }
-
-
-                viewModel.executelogin(email, password)
-                viewModel.loginResult.observe(this) {
-                    Log.e("Login", "it: ${it}")
-                    if (it.error == false) {
-                        save(
-                            UserModel(
-                                it.loginResult?.token.toString(),
-                                it.loginResult?.name.toString(),
-                                it.loginResult?.userId.toString(),
-                                true
-                            )
-                        )
-                    }
-                }
-            } catch (e: retrofit2.HttpException) {
-                showLoading(false)
-                val errorBody = e.response()?.errorBody()?.string()
-                val errorResponse = Gson().fromJson(errorBody, ErrorResponse::class.java)
-                showToast(errorResponse.message)
-            }
-
+        binding.sign.setOnClickListener {
+            signIn()
         }
     }
 
+    private fun signIn() {
+        val credentialManager = CredentialManager.create(this) // Pastikan untuk mengimpor androidx.CredentialManager
+        val googleIdOption = GetGoogleIdOption.Builder()
+            .setFilterByAuthorizedAccounts(false)
+            .setServerClientId(getString(R.string.your_web_client_id))
+            .build()
+        val request = GetCredentialRequest.Builder() // Pastikan untuk mengimpor androidx.CredentialManager
+            .addCredentialOption(googleIdOption)
+            .build()
+
+        lifecycleScope.launch {
+            try {
+                val result: GetCredentialResponse = credentialManager.getCredential(
+                    request = request,
+                    context = this@LoginActivity,
+                )
+                handleSignIn(result)
+            } catch (e: GetCredentialException) { //import from androidx.CredentialManager
+                Log.d("Error", e.message.toString())
+            } catch (e: Exception) {
+                Log.d("Error", e.message.toString())
+            }
+        }
+    }
+
+    private fun handleSignIn(result: GetCredentialResponse) {
+        // Handle the successfully returned credential.
+        when (val credential = result.credential) {
+            is CustomCredential -> {
+                if (credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {
+                    try {
+                        val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
+                        firebaseAuthWithGoogle(googleIdTokenCredential.idToken)
+                    } catch (e: GoogleIdTokenParsingException) {
+                        Log.e(TAG, "Received an invalid google id token response", e)
+                    }
+                } else {
+                    // Catch any unrecognized custom credential type here.
+                    Log.e(TAG, "Unexpected type of credential")
+                }
+            }
+
+            else -> {
+                // Catch any unrecognized credential type here.
+                Log.e(TAG, "Unexpected type of credential")
+            }
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "signInWithCredential:success")
+                    val user: FirebaseUser? = auth.currentUser
+                    updateUI(user)
+                } else {
+                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    updateUI(null)
+                }
+            }
+    }
+
+    private fun updateUI(currentUser: FirebaseUser?) {
+        Log.d(TAG, "Updating UI")
+        if (currentUser != null) {
+            Log.d(TAG, "User is not null, starting MainActivity")
+            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            Log.d(TAG, "User is null, not starting MainActivity")
+        }
+    }
 
     private fun playAnimation() {
         ObjectAnimator.ofFloat(binding.loginImage, View.TRANSLATION_X, -30f, 30f).apply {
@@ -84,48 +130,22 @@ class LoginActivity : AppCompatActivity() {
             repeatCount = ObjectAnimator.INFINITE
             repeatMode = ObjectAnimator.REVERSE
         }.start()
-
-
-        val emailTextView =
-            ObjectAnimator.ofFloat(binding.loginEmailTextView, View.ALPHA, 1f).setDuration(100)
-        val emailEditTextLayout =
-            ObjectAnimator.ofFloat(binding.loginEmailLayout, View.ALPHA, 1f).setDuration(100)
-        val passwordTextView =
-            ObjectAnimator.ofFloat(binding.loginPasswordTextView, View.ALPHA, 1f).setDuration(100)
-        val passwordEditTextLayout =
-            ObjectAnimator.ofFloat(binding.loginPasswordLayout, View.ALPHA, 1f).setDuration(100)
-        val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 1f).setDuration(100)
-
-        AnimatorSet().apply {
-            playSequentially(
-                emailTextView,
-                emailEditTextLayout,
-                passwordTextView,
-                passwordEditTextLayout,
-                login
-            )
-            startDelay = 100
-        }.start()
     }
 
-    private fun save(session: UserModel) {
-        lifecycleScope.launch {
-            viewModel.saveUserSession(session)
-            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            ViewModelFactory.clearInstance()
-            startActivity(intent)
-        }
-    }
-
-
-    private fun showToast(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
 
     private fun showLoading(isLoading: Boolean) {
         binding.loginLoading.visibility = if (isLoading) View.VISIBLE else View.GONE
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        updateUI(currentUser)
+    }
+
+    companion object {
+        private const val TAG = "LoginActivity"
     }
 
 }
