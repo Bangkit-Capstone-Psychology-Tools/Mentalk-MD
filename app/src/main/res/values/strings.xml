@@ -18,4 +18,10 @@
     <string name="profile">Profil</string>
     <string name="logout">Keluar</string>
     <string name="googlelogin">Masuk dengan akun Google</string>
+    <string name="fill_email">Please fill up the column</string>
+    <string name="fill_password">Please fill up the column\n</string>
+    <string name="email_invalid">\@gmail.com</string>
+    <string name="pass_length_error">Password must be contained at least 8 characters</string>
+    <string name="button1">Mentest</string>
+    <string name="button2">Newsletter</string>
 </resources>

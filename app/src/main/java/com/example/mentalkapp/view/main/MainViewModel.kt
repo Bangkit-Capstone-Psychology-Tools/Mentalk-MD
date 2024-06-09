@@ -20,7 +20,6 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
     fun getUserSession(): LiveData<UserModel> {
         return repository.getUserSession().asLiveData()
     }
-
     fun clearUserSession() {
         viewModelScope.launch {
             repository.clearUserSession()

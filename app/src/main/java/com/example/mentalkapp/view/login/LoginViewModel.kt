@@ -12,11 +12,9 @@ class LoginViewModel(private val repository: UserRepository) : ViewModel() {
     var loginResult : MutableLiveData<LoginResponse> = repository.login
     var isLoading: LiveData<Boolean> = repository.isLoading
 
-
     fun executelogin(email: String, password: String) {
         return repository.executelogin(email, password)
     }
-
     suspend fun saveUserSession(user: UserModel) {
         repository.saveUserSession(user)
     }
