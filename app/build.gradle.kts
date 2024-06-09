@@ -11,6 +11,8 @@ android {
     compileSdk = 34
 
     defaultConfig {
+
+        buildConfigField("String", "API_URL", "\"https://story-api.dicoding.dev/v1/\"")
         applicationId = "com.example.mentalkapp"
         minSdk = 24
         targetSdk = 34
@@ -19,7 +21,7 @@ android {
 
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "API_URL", "\"https://story-api.dicoding.dev/v1/\"")
+
     }
 
     buildTypes {
