@@ -22,8 +22,8 @@ android {
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_KEY", "\"4716967331814629b51ef945d52def35\"")
-        buildConfigField("String", "API_URL", "\"https://newsapi.org/v2/\"")
+        buildConfigField("String", "API_KEY", "\"--\"")
+        buildConfigField("String", "API_URL", "\"--\"")
 
     }
 
