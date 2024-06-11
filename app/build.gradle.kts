@@ -13,7 +13,6 @@ android {
 
     defaultConfig {
 
-        buildConfigField("String", "API_URL", "\"https://story-api.dicoding.dev/v1/\"")
         applicationId = "com.example.mentalkapp"
         minSdk = 24
         targetSdk = 34
@@ -22,6 +21,9 @@ android {
 
         testInstrumentationRunner =
             "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", "\"4716967331814629b51ef945d52def35\"")
+        buildConfigField("String", "API_URL", "\"https://newsapi.org/v2/\"")
 
     }
 
