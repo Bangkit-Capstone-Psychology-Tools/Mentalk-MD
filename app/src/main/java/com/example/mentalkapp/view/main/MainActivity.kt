@@ -7,14 +7,21 @@ import android.text.Html
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.credentials.ClearCredentialStateRequest
 import androidx.credentials.CredentialManager
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mentalkapp.R
+import com.example.mentalkapp.data.adapter.NewsAdapter
+import com.example.mentalkapp.data.response.ArticlesItem
+import com.example.mentalkapp.data.util.ResultState
 import com.example.mentalkapp.databinding.ActivityMainBinding
 import com.example.mentalkapp.view.ImageData
 import com.example.mentalkapp.view.ImageSliderAdapter
@@ -28,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private lateinit var adapter: ImageSliderAdapter
+    private val viewModel: MainViewModel by viewModels()
     private val list = ArrayList<ImageData>()
     private lateinit var auth: FirebaseAuth
     private lateinit var dots: ArrayList<TextView>
@@ -37,6 +45,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvNews.layoutManager = layoutManager
+
+        viewModel.news.observe(this){
+                articles ->
+            when(articles){
+                is ResultState.Loading -> {
+                    binding.loginLoading.visibility = View.VISIBLE
+                }
+                is ResultState.Success -> {
+                    showRecyclerView()
+                    setNewsData(articles.data)
+                }
+                is ResultState.Error -> {
+                    Log.e("MainActivity", "Error: $articles")
+                    Toast.makeText(this, "Error: $articles", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         list.add(
             ImageData(R.drawable.img_6))
@@ -90,13 +118,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("MainActivity", "Menu item clicked: ${item.itemId}")
         return when (item.itemId) {
             R.id.sign_out_menu -> {
                 Log.d("MainActivity", "Sign out menu item selected")
                 signOut()
                 true
             }
-            else -> super.onOptionsItemSelected(item)
+            else -> {
+                Log.d("MainActivity", "Other menu item selected")
+                super.onOptionsItemSelected(item)
+            }
         }
     }
 
@@ -113,5 +145,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             finish()
         }
+    }
+    private fun setNewsData(consumer:List<ArticlesItem>){
+        val adapter = NewsAdapter()
+        adapter.submitList(consumer)
+        binding.rvNews.adapter = adapter
+    }
+
+    private fun showRecyclerView() {
+        // Hapus atau komentari baris yang menghentikan shimmer
+        binding.rvNews.visibility = View.VISIBLE
     }
 }

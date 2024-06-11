@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import com.example.mentalkapp.R
 import com.example.mentalkapp.view.login.LoginActivity
-import com.example.mentalkapp.view.main.MainActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
