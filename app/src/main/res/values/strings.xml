@@ -32,4 +32,5 @@
     <string name="news_image">Image News</string>
     <string name="tittle">News Tittle</string>
     <string name="news_description">News Description</string>
+    <string name="search_hint">Mau baca berita apa hari ini?</string>
 </resources>
