@@ -26,6 +26,7 @@ import com.example.mentalkapp.databinding.ActivityMainBinding
 import com.example.mentalkapp.view.ImageData
 import com.example.mentalkapp.view.ImageSliderAdapter
 import com.example.mentalkapp.view.login.LoginActivity
+import com.example.mentalkapp.view.news.NewsActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -48,6 +49,11 @@ class MainActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvNews.layoutManager = layoutManager
+
+        binding.button2.setOnClickListener {
+            val intent = Intent(this, NewsActivity::class.java)
+            startActivity(intent)
+        }
 
         viewModel.news.observe(this){
                 articles ->

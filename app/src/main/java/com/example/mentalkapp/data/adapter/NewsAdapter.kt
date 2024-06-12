@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mentalkapp.data.response.ArticlesItem
 import com.example.mentalkapp.databinding.NewsCardBinding
-import com.example.mentalkapp.view.detail.NewsDetailActivity
+import com.example.mentalkapp.view.news.NewsDetailActivity
 
 class NewsAdapter: ListAdapter<ArticlesItem, NewsAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
@@ -25,7 +25,7 @@ class NewsAdapter: ListAdapter<ArticlesItem, NewsAdapter.MyViewHolder>(DIFF_CALL
 
     class MyViewHolder(private val binding: NewsCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(articles: ArticlesItem){
-            binding.username.text = articles.title
+            binding.tittle.text = articles.title
             if (articles.urlToImage != null) {
                 Glide.with(binding.newsImage.context)
                     .load(articles.urlToImage)
@@ -36,7 +36,7 @@ class NewsAdapter: ListAdapter<ArticlesItem, NewsAdapter.MyViewHolder>(DIFF_CALL
                 val intent = Intent(itemView.context, NewsDetailActivity::class.java).apply {
                     putExtra("NEWS_PUBLISHED", articles.publishedAt)
                     putExtra("NEWS_TITTLE", articles.title)
-                    putExtra("NEWS_DESC", articles.description)
+                    putExtra("NEWS_URL", articles.url)
                     putExtra("NEWS_URL_TO_IMAGE", articles.urlToImage)
                 }
                 binding.root.context.startActivity(intent)
