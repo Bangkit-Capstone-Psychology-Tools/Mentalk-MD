@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "903027854816",
+    "project_id": "mentalkapp-9ece9",
+    "storage_bucket": "mentalkapp-9ece9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:903027854816:android:b29e9fbdcd12b21cdc6f85",
+        "android_client_info": {
+          "package_name": "com.example.mentalkapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "903027854816-dgv49ngnp4q293gb8ugjd4el26901nlj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mentalkapp",
+            "certificate_hash": "073b67830b625d13445763ecb499217de8f3a88f"
+          }
+        },
+        {
+          "client_id": "903027854816-lg8ha8pibiekhkrn0qarlj2jlk04iofl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mentalkapp",
+            "certificate_hash": "c3e4bb3f05d0f91be3b42573865ff55b57f973f4"
+          }
+        },
+        {
+          "client_id": "903027854816-m3cb6nni6nqa9otiilmbt3eavrcunu4l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mentalkapp",
+            "certificate_hash": "c4e79cd934d0caf773d853347c8b52a0a9e06ed1"
+          }
+        },
+        {
+          "client_id": "903027854816-jnj5q9mq6ih6ofhkap6sftaasn2fksrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXdV8I58VIDYIQEEmNba0rF7AvKu0DZAQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "903027854816-jnj5q9mq6ih6ofhkap6sftaasn2fksrm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

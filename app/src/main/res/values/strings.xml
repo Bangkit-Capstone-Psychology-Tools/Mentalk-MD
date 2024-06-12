@@ -7,7 +7,6 @@
     <string name="ayo">Ayo isi data diri</string>
     <string name="name">Nama</string>
     <string name="belum">Belum punya akun?</string>
-    <string name="analyze">Berikut ini hasil diagnosa anda</string>
     <string name="daftar">Daftar disini</string>
     <string name="login">Masuk</string>
     <string name="please">Mohon isi data diri anda</string>
@@ -18,8 +17,20 @@
     <string name="password">Password</string>
     <string name="profile">Profil</string>
     <string name="logout">Keluar</string>
-    <string name="desc">Deskripsi</string>
     <string name="googlelogin">Masuk dengan akun Google</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fill_email">Please fill up the column</string>
+    <string name="fill_password">Please fill up the column\n</string>
+    <string name="email_invalid">\@gmail.com</string>
+    <string name="pass_length_error">Password must be contained at least 8 characters</string>
+    <string name="button1">Mentest</string>
+    <string name="button2">Newsletter</string>
+    <string name="your_web_client_id">903027854816-jnj5q9mq6ih6ofhkap6sftaasn2fksrm.apps.googleusercontent.com</string>
+    <string name="label">Cancer</string>
+    <string name="articles">Articles</string>
+    <string name="titles">Tesla-Tata Electronics discreet pact boosts India\'s semiconductor ambitions as EV giant eyes local production: Report</string>
+    <string name="description">TheTesla-Tata deal, executed discreetly a few months ago, positions Tata Electronics as a reliable supplier for top-tier international clients seeking to establish a crucial component of their semiconductor value chain within India, as per an ET report.</string>
+    <string name="news_image">Image News</string>
+    <string name="tittle">News Tittle</string>
+    <string name="news_description">News Description</string>
+    <string name="search_hint">Mau baca berita apa hari ini?</string>
 </resources>

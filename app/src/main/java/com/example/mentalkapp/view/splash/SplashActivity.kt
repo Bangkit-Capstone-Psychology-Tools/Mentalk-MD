@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.example.mentalkapp.R
-import com.example.mentalkapp.view.main.MainActivity
+import com.example.mentalkapp.view.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,12 +14,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            goToMainActivity()
+            goToLoginActivity()
         }, 3000L)
     }
 
-    fun goToMainActivity() {
-        Intent(this, MainActivity::class.java).also {
+    fun goToLoginActivity() {
+        Intent(this, LoginActivity::class.java).also {
             startActivity(it)
             finish()
         }

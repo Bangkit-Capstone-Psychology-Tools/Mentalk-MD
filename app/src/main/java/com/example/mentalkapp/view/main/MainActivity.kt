@@ -4,32 +4,73 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.widget.ImageButton
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.CredentialManager
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.mentalkapp.R
+import com.example.mentalkapp.data.adapter.NewsAdapter
+import com.example.mentalkapp.data.response.ArticlesItem
+import com.example.mentalkapp.data.util.ResultState
 import com.example.mentalkapp.databinding.ActivityMainBinding
 import com.example.mentalkapp.view.ImageData
 import com.example.mentalkapp.view.ImageSliderAdapter
-import com.example.mentalkapp.view.test.TestActivity
+import com.example.mentalkapp.view.login.LoginActivity
+import com.example.mentalkapp.view.news.NewsActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
     private lateinit var adapter: ImageSliderAdapter
+    private val viewModel: MainViewModel by viewModels()
     private val list = ArrayList<ImageData>()
+    private lateinit var auth: FirebaseAuth
     private lateinit var dots: ArrayList<TextView>
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =ActivityMainBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
+        _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvNews.layoutManager = layoutManager
+
+        binding.button2.setOnClickListener {
+            val intent = Intent(this, NewsActivity::class.java)
+            startActivity(intent)
+        }
+
+        viewModel.news.observe(this){
+                articles ->
+            when(articles){
+                is ResultState.Loading -> {
+                    binding.loginLoading.visibility = View.VISIBLE
+                }
+                is ResultState.Success -> {
+                    showRecyclerView()
+                    setNewsData(articles.data)
+                }
+                is ResultState.Error -> {
+                    Log.e("MainActivity", "Error: $articles")
+                    Toast.makeText(this, "Error: $articles", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         list.add(
             ImageData(R.drawable.img_6))
@@ -50,19 +91,16 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        auth = Firebase.auth
+        val firebaseUser = auth.currentUser
 
-        val imageButton: ImageButton = binding.button1
-        imageButton.setOnClickListener {
-            val intent = Intent(this, TestActivity::class.java)
-            startActivity(intent)
+        if (firebaseUser == null) {
+            // Not signed in, launch the Login activity
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
         }
     }
-
 
     private fun selectedDot(position: Int) {
         for (i in 0 until list.size){
@@ -72,7 +110,6 @@ class MainActivity : AppCompatActivity() {
                 dots[i].setTextColor(ContextCompat.getColor(this, R.color.black))
         }
     }
-
     private fun setIndicator() {
         for (i in 0 until list.size) {
             dots.add(TextView(this))
@@ -85,6 +122,44 @@ class MainActivity : AppCompatActivity() {
             binding.indicator.addView(dots[i])
         }
     }
-}
 
-//Halo it's my first time using github
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        Log.d("MainActivity", "Menu item clicked: ${item.itemId}")
+        return when (item.itemId) {
+            R.id.sign_out_menu -> {
+                Log.d("MainActivity", "Sign out menu item selected")
+                signOut()
+                true
+            }
+            else -> {
+                Log.d("MainActivity", "Other menu item selected")
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    private fun signOut() {
+        lifecycleScope.launch {
+            val credentialManager = CredentialManager.create(this@MainActivity)
+            auth.signOut()
+            credentialManager.clearCredentialState(ClearCredentialStateRequest())
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+            finish()
+        }
+    }
+    private fun setNewsData(consumer:List<ArticlesItem>){
+        val adapter = NewsAdapter()
+        adapter.submitList(consumer)
+        binding.rvNews.adapter = adapter
+    }
+
+    private fun showRecyclerView() {
+        // Hapus atau komentari baris yang menghentikan shimmer
+        binding.rvNews.visibility = View.VISIBLE
+    }
+}
