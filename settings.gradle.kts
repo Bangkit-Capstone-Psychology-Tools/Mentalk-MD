@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MentalkApp"
+rootProject.name = "MentalkApp1"
 include(":app")
  

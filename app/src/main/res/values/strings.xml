@@ -7,6 +7,7 @@
     <string name="ayo">Ayo isi data diri</string>
     <string name="name">Nama</string>
     <string name="belum">Belum punya akun?</string>
+    <string name="analyze">Berikut ini hasil diagnosa anda</string>
     <string name="daftar">Daftar disini</string>
     <string name="login">Masuk</string>
     <string name="please">Mohon isi data diri anda</string>
@@ -17,5 +18,8 @@
     <string name="password">Password</string>
     <string name="profile">Profil</string>
     <string name="logout">Keluar</string>
+    <string name="desc">Deskripsi</string>
     <string name="googlelogin">Masuk dengan akun Google</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

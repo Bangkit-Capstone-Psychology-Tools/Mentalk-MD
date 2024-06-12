@@ -1,8 +1,10 @@
 package com.example.mentalkapp.view.main
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import com.example.mentalkapp.R
 import com.example.mentalkapp.databinding.ActivityMainBinding
 import com.example.mentalkapp.view.ImageData
 import com.example.mentalkapp.view.ImageSliderAdapter
+import com.example.mentalkapp.view.test.TestActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,12 +50,19 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val imageButton: ImageButton = binding.button1
+        imageButton.setOnClickListener {
+            val intent = Intent(this, TestActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 
     private fun selectedDot(position: Int) {
         for (i in 0 until list.size){
