@@ -4,9 +4,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bright">#0096FF</color>
     <color name="blue">#89CFF0</color>
+    <color name="blue1">#89CFF0</color>
     <color name="dark_blue">#0777DA</color>
     <color name="white_bone">#E4E4E4</color>
     <color name="gray">#6F6F70</color>
-    <color name="cyan">#7EDEF6</color>
-    <color name="transparent">#00FFFFFF</color>
+    <color name="cyan">#EEF5FF</color>
+    <color name="transparent">#86B6F6</color>
 </resources>

@@ -33,4 +33,7 @@
     <string name="tittle">News Tittle</string>
     <string name="news_description">News Description</string>
     <string name="search_hint">Mau baca berita apa hari ini?</string>
+    <string name="desc">deskripsi</string>
+    <string name="analyze">analisa</string>
+    <string name="classify">Klasifikasi</string>
 </resources>
