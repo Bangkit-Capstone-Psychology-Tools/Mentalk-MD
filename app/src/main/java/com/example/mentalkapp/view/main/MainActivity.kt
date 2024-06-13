@@ -31,6 +31,7 @@ import com.example.mentalkapp.view.overview.OverviewActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     private val list = ArrayList<ImageData>()
     private lateinit var auth: FirebaseAuth
     private lateinit var dots: ArrayList<TextView>
+    private lateinit var newsAdapter: NewsAdapter
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +52,9 @@ class MainActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.rvNews.layoutManager = layoutManager
+
+        newsAdapter = NewsAdapter()
+        binding.rvNews.adapter = newsAdapter
 
         binding.button1.setOnClickListener{
             val intent = Intent(this, OverviewActivity::class.java)
@@ -61,19 +66,20 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        viewModel.news.observe(this){
-                articles ->
-            when(articles){
+        viewModel.news.observe(this) { articles ->
+            when (articles) {
                 is ResultState.Loading -> {
                     binding.loginLoading.visibility = View.VISIBLE
                 }
                 is ResultState.Success -> {
-                    showRecyclerView()
-                    setNewsData(articles.data)
+                    lifecycleScope.launch(Dispatchers.Main) {
+                        showRecyclerView()
+                        setNewsData(articles.data)
+                    }
                 }
                 is ResultState.Error -> {
-                    Log.e("MainActivity", "Error: $articles")
-                    Toast.makeText(this, "Error: $articles", Toast.LENGTH_SHORT).show()
+                    Log.e("MainActivity", "Error: ${articles.error}")
+                    Toast.makeText(this, "Error: ${articles.error}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -101,8 +107,8 @@ class MainActivity : AppCompatActivity() {
         val firebaseUser = auth.currentUser
 
         if (firebaseUser == null) {
-            // Not signed in, launch the Login activity
-            startActivity(Intent(this, LoginActivity::class.java))
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()
             return
         }
@@ -151,21 +157,26 @@ class MainActivity : AppCompatActivity() {
 
     private fun signOut() {
         lifecycleScope.launch {
-            val credentialManager = CredentialManager.create(this@MainActivity)
-            auth.signOut()
-            credentialManager.clearCredentialState(ClearCredentialStateRequest())
-            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-            finish()
+            try {
+                val credentialManager = CredentialManager.create(this@MainActivity)
+                auth.signOut()
+                credentialManager.clearCredentialState(ClearCredentialStateRequest())
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                finish()
+            } catch (e: Exception) {
+                Log.e("MainActivity", "Sign out failed: ${e.message}")
+                Toast.makeText(this@MainActivity, "Sign out failed", Toast.LENGTH_SHORT).show()
+            }
         }
     }
-    private fun setNewsData(consumer:List<ArticlesItem>){
-        val adapter = NewsAdapter()
-        adapter.submitList(consumer)
-        binding.rvNews.adapter = adapter
+    private fun setNewsData(consumer: List<ArticlesItem>) {
+    newsAdapter.submitList(consumer)
     }
-
     private fun showRecyclerView() {
-        // Hapus atau komentari baris yang menghentikan shimmer
         binding.rvNews.visibility = View.VISIBLE
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
