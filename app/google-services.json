@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "903027854816-3i9mcekqq60u9su6p3anbej453g3knk6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mentalkapp",
+            "certificate_hash": "3fc28e2f1c7cc4f4a55435d9640ed3cefef333b3"
+          }
+        },
+        {
           "client_id": "903027854816-dgv49ngnp4q293gb8ugjd4el26901nlj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
