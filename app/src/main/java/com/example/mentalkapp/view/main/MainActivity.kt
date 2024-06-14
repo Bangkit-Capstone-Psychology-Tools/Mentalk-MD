@@ -161,13 +161,18 @@ class MainActivity : AppCompatActivity() {
                 val credentialManager = CredentialManager.create(this@MainActivity)
                 auth.signOut()
                 credentialManager.clearCredentialState(ClearCredentialStateRequest())
-                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-                finish()
+                // Pastikan operasi di atas berhasil sebelum navigasi
+                navigateToLogin()
             } catch (e: Exception) {
                 Log.e("MainActivity", "Sign out failed: ${e.message}")
                 Toast.makeText(this@MainActivity, "Sign out failed", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+    private fun navigateToLogin() {
+        val intent = Intent(this@MainActivity, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
     }
     private fun setNewsData(consumer: List<ArticlesItem>) {
     newsAdapter.submitList(consumer)
