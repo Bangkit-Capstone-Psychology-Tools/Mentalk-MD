@@ -105,12 +105,26 @@ class MainActivity : AppCompatActivity() {
 
         auth = Firebase.auth
         val firebaseUser = auth.currentUser
-
         if (firebaseUser == null) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            // Not signed in, launch the Login activity
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
+        }
+
+
+        binding.toolbar.setOnMenuItemClickListener{item ->
+            when (item.itemId) {
+                R.id.sign_out_menu -> {
+                    Log.d("MainActivity", "Sign out menu item selected")
+                    signOut()
+                }
+                else -> {
+                    Log.d("MainActivity", "Other menu item selected")
+                    super.onOptionsItemSelected(item)
+                }
+            }
+            true
         }
     }
 
@@ -135,47 +149,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        Log.d("MainActivity", "Menu item clicked: ${item.itemId}")
-        return when (item.itemId) {
-            R.id.sign_out_menu -> {
-                Log.d("MainActivity", "Sign out menu item selected")
-                signOut()
-                true
-            }
-            else -> {
-                Log.d("MainActivity", "Other menu item selected")
-                super.onOptionsItemSelected(item)
-            }
-        }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
 
     private fun signOut() {
         lifecycleScope.launch {
             try {
                 val credentialManager = CredentialManager.create(this@MainActivity)
+                Log.e("MainActivity", "CredentialManager created successfully")
+
                 auth.signOut()
+                Log.e("MainActivity", "Signed out from auth successfully")
+
                 credentialManager.clearCredentialState(ClearCredentialStateRequest())
+                Log.e("MainActivity", "Credential state cleared successfully")
+
                 // Pastikan operasi di atas berhasil sebelum navigasi
                 navigateToLogin()
+                Log.e("MainActivity", "Navigated to login successfully")
             } catch (e: Exception) {
                 Log.e("MainActivity", "Sign out failed: ${e.message}")
                 Toast.makeText(this@MainActivity, "Sign out failed", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+
+
+
     private fun navigateToLogin() {
         val intent = Intent(this@MainActivity, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }
     private fun setNewsData(consumer: List<ArticlesItem>) {
-    newsAdapter.submitList(consumer)
+        newsAdapter.submitList(consumer)
     }
     private fun showRecyclerView() {
         binding.rvNews.visibility = View.VISIBLE
