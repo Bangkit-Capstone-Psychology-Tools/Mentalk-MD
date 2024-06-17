@@ -33,13 +33,15 @@ class NewsActivity : AppCompatActivity() {
                 }
 
                 is ResultState.Success -> {
+                    binding.pgNews.visibility = View.GONE
                     showRecyclerView()
                     setNewsData(articles.data)
                 }
 
                 is ResultState.Error -> {
-                    Log.e("MainActivity", "Error: $articles")
-                    Toast.makeText(this, "Error: $articles", Toast.LENGTH_SHORT).show()
+                    binding.pgNews.visibility = View.GONE
+                    Log.e("MainActivity", "Error: ${articles.error}")
+                    Toast.makeText(this, "Error: ${articles.error}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -56,7 +58,7 @@ class NewsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setNewsData(consumer:List<ArticlesItem>){
+    private fun setNewsData(consumer: List<ArticlesItem>) {
         val adapter = NewsAdapter()
         adapter.submitList(consumer)
         binding.rvNews.adapter = adapter
