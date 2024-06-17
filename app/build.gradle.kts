@@ -96,5 +96,8 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
+    //Cardview
+    implementation ("androidx.cardview:cardview:1.0.0")
+
 
 }
