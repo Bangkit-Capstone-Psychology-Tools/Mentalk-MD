@@ -1,5 +1,6 @@
 package com.example.mentalkapp.view.latihan.latviewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +19,8 @@ class Latihan1ViewModel(private val apiService: ApiService) : ViewModel() {
                 val result = apiService.lat1Result(input)
                 _response.postValue(result)
             } catch (e: Exception) {
-                // Handle error
+                // Log error or update UI to show error message
+                Log.e("Latihan1ViewModel", "Error fetching data", e)
             }
         }
     }
