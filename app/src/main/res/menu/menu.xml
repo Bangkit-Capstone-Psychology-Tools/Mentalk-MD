@@ -5,8 +5,6 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/settings">
         <menu>
-            <item android:id="@+id/btn_profil"
-                android:title="@string/profile"/>
             <item android:id="@+id/sign_out_menu"
                 android:title="@string/logout" />
         </menu>

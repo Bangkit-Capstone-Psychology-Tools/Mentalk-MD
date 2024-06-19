@@ -12,11 +12,9 @@ import retrofit2.HttpException
 class MainViewModel: ViewModel() {
     private val _news = MutableLiveData<ResultState<List<ArticlesItem>>>()
     val news = _news
-
     init {
         getNews()
     }
-
     private fun getNews() {
         viewModelScope.launch {
             try {
