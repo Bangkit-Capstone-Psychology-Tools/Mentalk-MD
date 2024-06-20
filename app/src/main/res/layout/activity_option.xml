@@ -12,8 +12,8 @@
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/blue"
+        android:layout_height="350dp"
+        android:background="@drawable/img_12"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -34,14 +34,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mentest1"
-                android:textSize="20sp"/>
+                android:textStyle="bold"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@string/the_result" />
 
             <Button
                 android:id="@+id/test1"
@@ -50,8 +58,9 @@
                 android:layout_marginStart="230dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
-                android:text="Mulai"
+                android:text="@string/mulaii"
                 android:backgroundTint="@color/blue"/>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -70,23 +79,33 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mentest2"
-                android:textSize="20sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/the_result_only"
+                android:textSize="12sp" />
+
             <Button
                 android:id="@+id/test2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mulai"
                 android:layout_marginStart="230dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="10dp"
-                android:backgroundTint="@color/blue"/>
+                android:backgroundTint="@color/blue"
+                android:text="Mulai" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
