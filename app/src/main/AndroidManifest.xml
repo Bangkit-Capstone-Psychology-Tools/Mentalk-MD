@@ -23,12 +23,6 @@
             android:name=".view.overview.OverviewActivity"
             android:exported="false" />
         <activity
-            android:name=".view.latihan.Latihan4Activity"
-            android:exported="false" />
-        <activity
-            android:name=".view.latihan.Latihan3Activity"
-            android:exported="false" />
-        <activity
             android:name=".view.latihan.Latihan2Activity"
             android:exported="false" />
         <activity

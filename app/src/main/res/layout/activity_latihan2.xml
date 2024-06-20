@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.latihan.Latihan3Activity"
+    tools:context=".view.latihan.Latihan2Activity"
     android:background="@color/cyan">
 
     <com.google.android.material.appbar.MaterialToolbar
