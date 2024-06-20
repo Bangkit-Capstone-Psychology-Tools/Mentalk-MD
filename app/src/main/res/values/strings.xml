@@ -1,23 +1,13 @@
 <resources>
     <string name="app_name">MentalkApp</string>
-    <string name="kelompok">Dibuat oleh tim C241-PS188 </string>
-    <string name="kalimat_splash">Masih bingung</string>
+    <string name="kelompok">Made by C241-PS188 team</string>
+    <string name="kalimat_splash">Your Digital Ally in Mental Health Analysis</string>
     <string name="detail">Detail</string>
-    <string name="welcome">Selamat Datang!</string>
-    <string name="ayo">Ayo isi data diri</string>
-    <string name="name">Nama</string>
-    <string name="belum">Belum punya akun?</string>
-    <string name="daftar">Daftar disini</string>
-    <string name="login">Masuk</string>
-    <string name="please">Mohon isi data diri anda</string>
-    <string name="register">Daftar</string>
-    <string name="phone">Nomor Handphone</string>
-    <string name="certification_number">Nomor Sertifikat</string>
+    <string name="welcome">Welcome to Mentalk!</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="profile">Profil</string>
-    <string name="logout">Keluar</string>
-    <string name="googlelogin">Masuk dengan akun Google</string>
+    <string name="logout">Log Out</string>
+    <string name="googlelogin">Sign in with a Google Account</string>
     <string name="fill_email">Please fill up the column</string>
     <string name="fill_password">Please fill up the column\n</string>
     <string name="email_invalid">\@gmail.com</string>
@@ -25,20 +15,20 @@
     <string name="button1">Mentest</string>
     <string name="button2">Newsletter</string>
     <string name="your_web_client_id">903027854816-jnj5q9mq6ih6ofhkap6sftaasn2fksrm.apps.googleusercontent.com</string>
-    <string name="label">Cancer</string>
     <string name="articles">Articles</string>
-    <string name="titles">Tesla-Tata Electronics discreet pact boosts India\'s semiconductor ambitions as EV giant eyes local production: Report</string>
-    <string name="description">TheTesla-Tata deal, executed discreetly a few months ago, positions Tata Electronics as a reliable supplier for top-tier international clients seeking to establish a crucial component of their semiconductor value chain within India, as per an ET report.</string>
     <string name="news_image">Image News</string>
     <string name="tittle">News Tittle</string>
     <string name="news_description">News Description</string>
-    <string name="search_hint">Mau baca berita apa hari ini?</string>
-    <string name="desc">deskripsi</string>
-    <string name="analyze">analisa</string>
-    <string name="classify">Klasifikasi</string>
+    <string name="search_hint">Wanna read hot health news?</string>
+    <string name="desc">descriptiom</string>
+    <string name="analyze">Analyze</string>
+    <string name="classify">Analyze</string>
     <string name="berita1">Sella turcica merupakan cekungan berbentuk pelana yang terletak di tulang dasar tengkorak atau tulang baji. Area ini adalah tempat kelenjar pituitari atau hipofisis berada.
 “Kelenjar pituitari berfungsi memproduksi hormon tertentu dan juga mengendalikan pelepasan hormon dari kelenjar lain,” jelas dr. Dewanta dikutip akun Instagram @rsazra, Rabu 19 Juni 2024.\n\nPenyebab Empty Sella Syndrome beragam, bisa disebabkan oleh kelainan sejak lahir, cedera otak, atau adanya tumor.
 Gejala yang muncul juga bervariasi, termasuk sakit kepala, kelelahan, masalah menstruasi, dan masalah kesuburan.
 “Gejala Empty Sella Syndrome sangat bervariasi dan bisa mempengaruhi berbagai aspek kesehatan. Oleh karena itu, deteksi dini dan penanganan yang tepat sangat penting,” tambah dr. Dewanta.</string>
     <string name="describe">Describe how do you feel right now</string>
+    <string name="mentest1">Mentest 1</string>
+    <string name="mentest2">Mentest 2</string>
+    <string name="hintmentest1">Write down what your client\'s feelings</string>
 </resources>

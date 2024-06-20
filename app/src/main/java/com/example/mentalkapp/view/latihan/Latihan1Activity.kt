@@ -19,6 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class Latihan1Activity : AppCompatActivity() {
     private lateinit var binding: ActivityLatihan1Binding
     private val viewModel: Latihan1ViewModel by viewModels {
