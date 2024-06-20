@@ -14,15 +14,9 @@ class NewsDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val tittle = intent.getStringExtra("NEWS_TITTLE")
-        val detailUrl = intent.getStringExtra("NEWS_DESC")
         val publishedat = intent.getStringExtra("NEWS_PUBLISHED")
-        val urlToImage = intent.getStringExtra("NEWS_URL_TO_IMAGE")
 
         binding.tittle.text = tittle
         binding.published.text = publishedat
-        binding.detailUrl.text = detailUrl
-        Glide.with(this)
-            .load(urlToImage)
-            .into(binding.detailImage)
     }
 }
