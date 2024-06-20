@@ -12,18 +12,16 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 class ApiConfigMentest {
-    companion object{
+    companion object {
         fun getApiServiceMentest(): ApiService {
-            val loggingInterceptor = if(BuildConfig.DEBUG) {
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            } else {
-                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
-            }
             val client = OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor)
+                .connectTimeout(30, TimeUnit.SECONDS)  // Increase connect timeout
+                .readTimeout(30, TimeUnit.SECONDS)     // Increase read timeout
+                .writeTimeout(30, TimeUnit.SECONDS)    // Increase write timeout
                 .build()
+
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://4a528d5c92a3.ngrok.app/model/")
+                .baseUrl("https://mentalk-image-ytfxja5liq-et.a.run.app/model/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

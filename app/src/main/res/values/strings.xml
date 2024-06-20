@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">MentalkApp</string>
     <string name="kelompok">Dibuat oleh tim C241-PS188 </string>
-    <string name="kalimat_splash">Masih bingung</string>
+    <string name="kalimat_splash">Take care of your mental health with Mentalk</string>
     <string name="detail">Detail</string>
-    <string name="welcome">Selamat Datang!</string>
+    <string name="welcome">Hello, welcome back!</string>
     <string name="ayo">Ayo isi data diri</string>
     <string name="name">Nama</string>
     <string name="belum">Belum punya akun?</string>
@@ -35,5 +35,6 @@
     <string name="search_hint">Mau baca berita apa hari ini?</string>
     <string name="desc">deskripsi</string>
     <string name="analyze">analisa</string>
-    <string name="classify">Klasifikasi</string>
+    <string name="classify">Test now</string>
+    <string name="describe">Describe how you feel right now</string>
 </resources>
