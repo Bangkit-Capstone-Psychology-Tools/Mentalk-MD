@@ -49,16 +49,30 @@
 
             <TextView
                 android:id="@+id/tittle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="75dp"
-                android:layout_marginTop="8dp"
-                android:text="News Tittle"
-                android:textSize="20sp"
+                android:layout_width="213dp"
+                android:layout_height="119dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="160dp"
+                android:text="@string/news_tittle"
+                android:textSize="15sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.014"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toTopOf="@+id/cardView" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.17" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="132dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/read_more"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
+                app:layout_constraintTop_toBottomOf="@+id/tittle" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

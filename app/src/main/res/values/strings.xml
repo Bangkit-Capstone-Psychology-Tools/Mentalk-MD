@@ -28,7 +28,15 @@
 Gejala yang muncul juga bervariasi, termasuk sakit kepala, kelelahan, masalah menstruasi, dan masalah kesuburan.
 “Gejala Empty Sella Syndrome sangat bervariasi dan bisa mempengaruhi berbagai aspek kesehatan. Oleh karena itu, deteksi dini dan penanganan yang tepat sangat penting,” tambah dr. Dewanta.</string>
     <string name="describe">Describe how do you feel right now</string>
-    <string name="mentest1">Mentest 1</string>
-    <string name="mentest2">Mentest 2</string>
+    <string name="mentest1">What do you think about yesterday</string>
+    <string name="mentest2">How the emotion</string>
     <string name="hintmentest1">Write down what your client\'s feelings</string>
+    <string name="logiiiin">Sign in with Google account</string>
+    <string name="read_more">Read more</string>
+    <string name="news_tittle">News Tittle</string>
+    <string name="mulai">Mulai</string>
+    <string name="test_overview">Test Overview</string>
+    <string name="mulaii">Mulai</string>
+    <string name="the_result">The result will show about emotion and topic</string>
+    <string name="the_result_only">The result only show the emotion more specific</string>
 </resources>

@@ -2,15 +2,11 @@ package com.example.mentalkapp.data.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mentalkapp.R
 import com.example.mentalkapp.data.response.ArticlesItem
 import com.example.mentalkapp.databinding.NewsCardBinding
 import com.example.mentalkapp.view.news.NewsDetailActivity

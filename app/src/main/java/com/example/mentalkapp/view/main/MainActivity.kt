@@ -5,8 +5,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -133,7 +131,7 @@ class MainActivity : AppCompatActivity() {
             if (i == position)
                 dots[i].setTextColor(ContextCompat.getColor(this, R.color.blue))
             else
-                dots[i].setTextColor(ContextCompat.getColor(this, R.color.black))
+                dots[i].setTextColor(ContextCompat.getColor(this, R.color.white))
         }
     }
     private fun setIndicator() {
