@@ -40,8 +40,6 @@ class NewsAdapter: ListAdapter<ArticlesItem, NewsAdapter.MyViewHolder>(DIFF_CALL
                 val intent = Intent(itemView.context, NewsDetailActivity::class.java).apply {
                     putExtra("NEWS_PUBLISHED", articles.publishedAt)
                     putExtra("NEWS_TITTLE", articles.title)
-                    putExtra("NEWS_URL", articles.url)
-                    putExtra("NEWS_URL_TO_IMAGE", articles.urlToImage)
                 }
                 binding.root.context.startActivity(intent)
             }
