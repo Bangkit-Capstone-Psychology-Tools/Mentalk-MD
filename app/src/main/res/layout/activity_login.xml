@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408" />
+        app:layout_constraintVertical_bias="0.332" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:id="@+id/loginImage"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="140dp"
         android:contentDescription="@string/detail"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="480dp"
+        android:layout_marginBottom="532dp"
         android:text="@string/welcome"
         android:textColor="@color/bright"
         android:textSize="30sp"
@@ -54,11 +54,12 @@
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign"
-        android:layout_width="250dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,8 +23,8 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textSize="32sp"
+        android:text="@string/describe"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,11 +34,14 @@
 
     <Button
         android:id="@+id/btnClassify"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/blue"
+        android:drawableEnd="@drawable/search"
         android:text="@string/classify"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textField" />
@@ -70,7 +73,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edInput"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:gravity="top"
             android:lines="10" />
     </com.google.android.material.textfield.TextInputLayout>

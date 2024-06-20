@@ -67,5 +67,4 @@ class NewsActivity : AppCompatActivity() {
     private fun showRecyclerView() {
         binding.rvNews.visibility = View.VISIBLE
     }
-
 }
