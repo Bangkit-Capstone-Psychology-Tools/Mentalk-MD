@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">MentalkApp</string>
     <string name="kelompok">Dibuat oleh tim C241-PS188 </string>
-    <string name="kalimat_splash">Take care of your mental health with Mentalk</string>
+    <string name="kalimat_splash">Masih bingung</string>
     <string name="detail">Detail</string>
-    <string name="welcome">Hello, welcome back!</string>
+    <string name="welcome">Selamat Datang!</string>
     <string name="ayo">Ayo isi data diri</string>
     <string name="name">Nama</string>
     <string name="belum">Belum punya akun?</string>
@@ -35,6 +35,10 @@
     <string name="search_hint">Mau baca berita apa hari ini?</string>
     <string name="desc">deskripsi</string>
     <string name="analyze">analisa</string>
-    <string name="classify">Test now</string>
-    <string name="describe">Describe how you feel right now</string>
+    <string name="classify">Klasifikasi</string>
+    <string name="berita1">Sella turcica merupakan cekungan berbentuk pelana yang terletak di tulang dasar tengkorak atau tulang baji. Area ini adalah tempat kelenjar pituitari atau hipofisis berada.
+“Kelenjar pituitari berfungsi memproduksi hormon tertentu dan juga mengendalikan pelepasan hormon dari kelenjar lain,” jelas dr. Dewanta dikutip akun Instagram @rsazra, Rabu 19 Juni 2024.\n\nPenyebab Empty Sella Syndrome beragam, bisa disebabkan oleh kelainan sejak lahir, cedera otak, atau adanya tumor.
+Gejala yang muncul juga bervariasi, termasuk sakit kepala, kelelahan, masalah menstruasi, dan masalah kesuburan.
+“Gejala Empty Sella Syndrome sangat bervariasi dan bisa mempengaruhi berbagai aspek kesehatan. Oleh karena itu, deteksi dini dan penanganan yang tepat sangat penting,” tambah dr. Dewanta.</string>
+    <string name="describe">Describe how do you feel right now</string>
 </resources>
