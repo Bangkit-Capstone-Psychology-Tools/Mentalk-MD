@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.splash.SplashActivity"
-    android:background="@color/dark_blue">
+    android:background="@color/blue">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"

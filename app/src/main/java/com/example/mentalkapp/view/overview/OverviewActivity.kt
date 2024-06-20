@@ -9,6 +9,7 @@ import com.example.mentalkapp.view.option.OptionActivity
 class OverviewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOverviewBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOverviewBinding.inflate(layoutInflater)
