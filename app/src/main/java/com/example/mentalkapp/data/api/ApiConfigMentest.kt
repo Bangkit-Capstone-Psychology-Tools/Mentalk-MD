@@ -15,7 +15,7 @@ class ApiConfigMentest {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://mentalk-image-ytfxja5liq-et.a.run.app/model/")
+                .baseUrl("-")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

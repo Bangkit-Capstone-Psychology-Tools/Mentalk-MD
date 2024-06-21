@@ -12,16 +12,16 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("top-headlines")
+    @GET("everything-")
     suspend fun getNews(
-        @Query("country") country: String = "id",
-        @Query("category") category: String = "health",
-        @Query("apiKey") apiKey: String = BuildConfig.API_KEY
+        @Query("anything") country: String = "id",
+        @Query("anything") category: String = "health",
+        @Query("anything") apiKey: String = "-"
     ):News
 
-    @POST("wdyt_yesterday")
+    @POST("everything-")
     fun postInput(@Body requestBody: Map<String, String>): Call<Lat1Response>
 
-    @POST("text_emotion")
+    @POST("everything-")
     fun postLatihan(@Body requestBody: Map<String, String>): Call<Lat2Response>
 }
