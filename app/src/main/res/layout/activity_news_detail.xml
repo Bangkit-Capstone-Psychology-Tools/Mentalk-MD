@@ -36,12 +36,12 @@
 
             <ImageView
                 android:id="@+id/detail_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/news_image"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 app:layout_constraintDimensionRatio="H,16:9"
-                app:srcCompat="@drawable/b" />
+                app:srcCompat="@drawable/img_17" />
         </androidx.cardview.widget.CardView>
 
         <TextView
