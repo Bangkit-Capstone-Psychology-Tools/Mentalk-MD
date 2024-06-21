@@ -39,4 +39,5 @@ Gejala yang muncul juga bervariasi, termasuk sakit kepala, kelelahan, masalah me
     <string name="mulaii">Mulai</string>
     <string name="the_result">The result will show about emotion and topic</string>
     <string name="the_result_only">The result only show the emotion more specific</string>
+    <string name="separatormain">Baca berita hangat hari ini</string>
 </resources>
